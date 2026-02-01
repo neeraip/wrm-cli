@@ -146,29 +146,33 @@ RG1  VOLUME  0:15  1.0  FILE  "C:\Data\rainfall.dat"  RG1  IN
 
 ## 📂 Example Files
 
-This repository includes validated example files ready to run:
+This repository includes validated and tested example files ready to run:
 
-### EPANET Examples (188 files)
+### EPANET Examples (182 files)
 
 ```
 EPANET Example Files/
-├── asce-tf-wdst/          # ASCE Task Force benchmarks
-├── collect-epanet-inp/    # Community contributed models
-├── epanet-desktop/        # Official EPANET examples
-├── epanet-example-networks/
-└── L-Town/                # L-Town benchmark network
+├── asce-tf-wdst/          # ASCE Task Force benchmarks (30 files)
+├── collect-epanet-inp/    # Community contributed models (107 files)
+├── epanet-desktop/        # Official EPANET examples (2 files)
+├── epanet-example-networks/  # EPANET test suite (42 files)
+└── L-Town/                # L-Town benchmark network (1 file)
 ```
 
-### SWMM Examples (898 files)
+### SWMM Examples (758 files)
+
+All files have been validated and tested via API simulations. Source: [SWMMEnablement/1729-SWMM5-Models](https://github.com/SWMMEnablement/1729-SWMM5-Models) repository (~1300 files initially validated, 758 verified working).
 
 ```
 EPASWMM Example Files/
-├── EPA/                   # Official EPA examples
-├── Hydraulics/            # Hydraulic model tests
-├── Hydrology/             # Hydrology model tests
-├── LID/                   # Low Impact Development
-├── SWMM5_NCIMM/          # NCIMM test suite
-└── ...                    # More categories
+├── SWMM5_NCIMM/          # NCIMM test suite (200 files)
+├── EPA/                   # Official EPA examples (132 files)
+├── Hydraulics/            # Hydraulic model tests (113 files)
+├── Hydrology/             # Hydrology model tests (75 files)
+├── OWA_EXTRAN/           # Open Water Analytics EXTRAN (67 files)
+├── Simon_EPA/             # Community contributed (47 files)
+├── LID/                   # Low Impact Development (2 files)
+└── ...                    # More categories (122 files)
 ```
 
 **Run any example:**
