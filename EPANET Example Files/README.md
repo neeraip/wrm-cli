@@ -1,17 +1,17 @@
 # EPANET Example Files
 
-This folder contains **188 validated EPANET input files** ready to run on the NEER Water Resources Modeling API.
+This folder contains **182 validated EPANET input files** ready to run on the NEER Water Resources Modeling API.
 
 ## 📊 Summary
 
 | Source | Files | Description |
 |--------|-------|-------------|
-| `asce-tf-wdst/` | 31 | ASCE Task Force on Water Distribution System Testbeds benchmarks |
-| `collect-epanet-inp/` | 112 | Community contributed models from KIOS Research |
+| `asce-tf-wdst/` | 30 | ASCE Task Force on Water Distribution System Testbeds benchmarks |
+| `collect-epanet-inp/` | 107 | Community contributed models from KIOS Research |
 | `epanet-desktop/` | 2 | Official EPANET desktop examples (Net1, Net3) |
 | `epanet-example-networks/` | 42 | EPANET test suite models |
 | `L-Town/` | 1 | L-Town benchmark network |
-| **Total** | **188** | |
+| **Total** | **182** | |
 
 ## 🚀 Running Examples
 
@@ -37,7 +37,6 @@ EPANET Example Files/
 │   ├── Balerma/
 │   ├── Battle of the Calibration Networks System/
 │   ├── Battle of the Water Sensor Networks/
-│   ├── exnet/
 │   ├── Extended Hanoi/
 │   ├── Hanoi/
 │   ├── ky1/ through ky15/           # Kentucky networks

@@ -1,31 +1,31 @@
 # EPA SWMM Example Files
 
-This folder contains **898 validated SWMM input files** ready to run on the NEER Water Resources Modeling API.
+This folder contains **758 validated SWMM input files** ready to run on the NEER Water Resources Modeling API.
 
 ## 📊 Summary
 
 | Folder | Files | Description |
 |--------|-------|-------------|
+| `SWMM5_NCIMM/` | 200 | NCIMM comprehensive test suite |
 | `EPA/` | 132 | Official EPA SWMM examples and test cases |
-| `Hydraulics/` | 122 | Hydraulic routing test models |
-| `Hydrology/` | 83 | Hydrologic modeling examples |
-| `SWMM5_NCIMM/` | 288 | NCIMM comprehensive test suite |
-| `OWA_EXTRAN/` | 70 | Open Water Analytics EXTRAN models |
-| `Simon_EPA/` | 53 | Simon's EPA model collection |
-| `Semi_Real_Models/` | 25 | Semi-realistic test scenarios |
-| `Weirs/` | 23 | Weir and orifice test models |
-| `NCIMM_ROUTING/` | 20 | NCIMM routing examples |
+| `Hydraulics/` | 113 | Hydraulic routing test models |
+| `Hydrology/` | 75 | Hydrologic modeling examples |
+| `OWA_EXTRAN/` | 67 | Open Water Analytics EXTRAN models |
+| `Simon_EPA/` | 47 | Simon's EPA model collection |
+| `Semi_Real_Models/` | 23 | Semi-realistic test scenarios |
+| `Weirs/` | 22 | Weir and orifice test models |
 | `LEW_CHI_SWMM5.2/` | 19 | LEW/CHI test models |
-| `Orifices/` | 16 | Orifice configuration tests |
-| `LEW_update_v5113/` | 11 | LEW version 5.1.13 models |
-| `Pumps/` | 10 | Pump station examples |
-| `WQ/` | 8 | Water quality models |
+| `Orifices/` | 15 | Orifice configuration tests |
+| `NCIMM_ROUTING/` | 15 | NCIMM routing examples |
+| `Pumps/` | 9 | Pump station examples |
 | `OWA_ROUTING/` | 5 | OWA routing examples |
+| `WQ/` | 5 | Water quality models |
 | `XPSWMM/` | 5 | XPSWMM converted models |
-| `OWA_update_v5111/` | 4 | OWA version updates |
-| `LID/` | 3 | Low Impact Development examples |
+| `OWA_update_v5111/` | 2 | OWA version updates |
+| `LID/` | 2 | Low Impact Development examples |
 | `z1000Years/` | 1 | Long-term simulation example |
-| **Total** | **898** | |
+| `LEW_update_v5113/` | 1 | LEW version 5.1.13 models |
+| **Total** | **758** | |
 
 ## 🚀 Running Examples
 
