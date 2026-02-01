@@ -33,7 +33,7 @@ system changes over time.
 
 [STATUS]
 ;ID              	Status/Setting
- 10              	Closed
+;10              	Closed  ; REMOVED - undefined link
 
 [PATTERNS]
 ;ID              	Multipliers
