@@ -159,20 +159,20 @@ EPANET Example Files/
 └── L-Town/                # L-Town benchmark network (1 file)
 ```
 
-### SWMM Examples (971 files)
+### SWMM Examples (813 files)
 
-All files have been validated and tested via API simulations. Source: [SWMMEnablement/1729-SWMM5-Models](https://github.com/SWMMEnablement/1729-SWMM5-Models) repository (~1300 files initially validated, 971 verified working).
+All files have been validated and tested via API simulations. Source: [SWMMEnablement/1729-SWMM5-Models](https://github.com/SWMMEnablement/1729-SWMM5-Models) repository (~1300 files initially validated, 813 verified working).
 
 ```
 EPASWMM Example Files/
-├── SWMM5_NCIMM/          # NCIMM test suite (361 files)
+├── SWMM5_NCIMM/          # NCIMM test suite (255 files)
 ├── EPA/                   # Official EPA examples (132 files)
-├── Hydraulics/            # Hydraulic model tests (122 files)
-├── Hydrology/             # Hydrology model tests (83 files)
-├── OWA_EXTRAN/           # Open Water Analytics EXTRAN (70 files)
-├── Simon_EPA/             # Community contributed (53 files)
-├── LID/                   # Low Impact Development (3 files)
-└── ...                    # More categories (147 files)
+├── Hydraulics/            # Hydraulic model tests (113 files)
+├── Hydrology/             # Hydrology model tests (75 files)
+├── OWA_EXTRAN/           # Open Water Analytics EXTRAN (67 files)
+├── Simon_EPA/             # Community contributed (47 files)
+├── LID/                   # Low Impact Development (2 files)
+└── ...                    # More categories (122 files)
 ```
 
 **Run any example:**
