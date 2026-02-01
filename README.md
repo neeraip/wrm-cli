@@ -161,7 +161,7 @@ EPANET Example Files/
 
 ### SWMM Examples (813 files)
 
-All files have been validated and tested via API simulations. Source: [SWMMEnablement/1729-SWMM5-Models](https://github.com/SWMMEnablement/1729-SWMM5-Models) repository (~1300 files initially validated, 813 verified working).
+All files have been validated and tested via API simulations. Source: [SWMMEnablement/1729-SWMM5-Models](https://github.com/SWMMEnablement/1729-SWMM5-Models) repository. We reviewed over 1,700 SWMM files from the repository, and only 813 were verified working successfully.
 
 ```
 EPASWMM Example Files/
