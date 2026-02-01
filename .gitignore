@@ -1,0 +1,78 @@
+# ===================
+# API & Secrets
+# ===================
+.env
+.env.local
+.env.*.local
+*.env
+config.json
+~/.wrapi_config.json
+
+# ===================
+# Python
+# ===================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# ===================
+# IDE & Editors
+# ===================
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ===================
+# Logs & Temp Files
+# ===================
+*.log
+*.tmp
+*.temp
+/tmp/
+
+# ===================
+# Simulation Results
+# ===================
+# Keep example input files, but ignore generated outputs
+*.out
+*.rpt
+results/
+output/
+
+# ===================
+# Large Data Files
+# ===================
+# Downloaded example files are tracked for distribution
+# But ignore any user-generated data
+*.zip
+!examples/*.zip
+
+# Summary files (can be regenerated)
+summary.json

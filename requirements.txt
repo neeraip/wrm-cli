@@ -1,0 +1,7 @@
+# Core dependencies
+requests>=2.28.0
+python-dotenv>=1.0.0
+
+# Optional: For parsing SWMM input/report/output files locally
+# pip install swmm-utils
+# swmm-utils>=0.1.0
