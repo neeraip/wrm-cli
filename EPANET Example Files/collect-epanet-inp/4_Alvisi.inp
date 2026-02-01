@@ -1464,455 +1464,455 @@
 
 
 [RULES]
-RULE 73 ";" ";" ";" ";"
+RULE 73
 if junction J73 Pressure <= 26.630
 then pump PU8 status is open
-RULE 74 ";" ";" ";" ";"
-if system time >= 16.367 ";"
-and system time <= 16.969 ";"
+RULE 74
+if system time >= 16.367
+and system time <= 16.969
 then pump PU10 status is open
-RULE 75 ";" ";" ";" ";"
+RULE 75
 if tank T2 level below 1.165
 then pump PU1 status is open
-RULE 76 ";" ";" ";" ";"
+RULE 76
 if junction J215 Pressure <= 24.484
 then pump PU4 status is open
-RULE 77 ";" ";" ";" ";"
+RULE 77
 if tank T2 level below 1.065
 then pump PU4 status is closed
-RULE 78 ";" ";" ";" ";"
+RULE 78
 if junction J221 Pressure <= 24.356
 then pump PU10 status is open
-RULE 1 ";" ";" ";" ";"
-if system time >= 140.504 ";"
-and system time <= 168 ";"
+RULE 1
+if system time >= 140.504
+and system time <= 168
 and tank T3 level above 3.385
 then pump PU4 status is closed
 ;and pump PU5 status is closed
-RULE 2 ";" ";" ";" ";"
-if system time >= 139.845 ";"
-and system time <= 168 ";"
+RULE 2
+if system time >= 139.845
+and system time <= 168
 and tank T3 level below 3.340
 then pump PU4 status is open
 and pump PU5 status is open
-RULE 3 ";" ";" ";" ";"
-if system time >= 140.667 ";"
-and system time <= 168 ";"
+RULE 3
+if system time >= 140.667
+and system time <= 168
 and tank T4 level above 2.454
 then pump PU6 status is closed
-RULE 4 ";" ";" ";" ";"
-if system time >= 138.665 ";"
-and system time <= 168 ";"
+RULE 4
+if system time >= 138.665
+and system time <= 168
 and tank T4 level below 2.387
 then pump PU6 status is open
-RULE 5 ";" ";" ";" ";"
-if system time >= 141.001 ";"
-and system time <= 168 ";"
+RULE 5
+if system time >= 141.001
+and system time <= 168
 and tank T4 level above 2.457
 then pump PU7 status is closed
-RULE 6 ";" ";" ";" ";"
-if system time >= 141.708 ";"
-and system time <= 168 ";"
+RULE 6
+if system time >= 141.708
+and system time <= 168
 and tank T4 level below 2.368
 then pump PU7 status is open
-RULE 7 ";" ";" ";" ";"
-if system time >= 148.222 ";"
-and system time <= 168 ";"
+RULE 7
+if system time >= 148.222
+and system time <= 168
 and tank T7 level above 3.078
 then pump PU10 status is closed
-RULE 8 ";" ";" ";" ";"
-if system time >= 149.141 ";"
-and system time <= 168 ";"
+RULE 8
+if system time >= 149.141
+and system time <= 168
 and tank T7 level below 2.940
 then pump PU10 status is open
-RULE 9 ";" ";" ";" ";"
-if system time >= 151.065 ";"
-and system time <= 168 ";"
+RULE 9
+if system time >= 151.065
+and system time <= 168
 and tank T7 level above 2.951
 then pump PU11 status is closed
-RULE 10 ";" ";" ";" ";"
-if system time >= 151.814 ";"
-and system time <= 168 ";"
+RULE 10
+if system time >= 151.814
+and system time <= 168
 and tank T7 level below 2.841
 then pump PU11 status is open
-RULE 11 ";" ";" ";" ";"
-if system time >= 141.138 ";"
-and system time <= 168 ";"
+RULE 11
+if system time >= 141.138
+and system time <= 168
 and tank T5 level above 2.311
 then pump PU8 status is closed
-RULE 12 ";" ";" ";" ";"
-if system time >= 140.365 ";"
-and system time <= 168 ";"
+RULE 12
+if system time >= 140.365
+and system time <= 168
 and tank T5 level below 2.302
 then pump PU8 status is open
-RULE 13 ";" ";" ";" ";"
-if system time >= 141.211 ";"
-and system time <= 168 ";"
+RULE 13
+if system time >= 141.211
+and system time <= 168
 and tank T5 level above 2.288
 then pump PU9 status is closed
-RULE 14 ";" ";" ";" ";"
-if system time >= 142.884 ";"
-and system time <= 168 ";"
+RULE 14
+if system time >= 142.884
+and system time <= 168
 and tank T5 level below 2.077
 then pump PU9 status is open
-RULE 15 ";" ";" ";" ";"
-if system time >= 141.086 ";"
-and system time <= 168 ";"
+RULE 15
+if system time >= 141.086
+and system time <= 168
 and tank T1 level above 5.674
 then pump PU1 status is closed
 and pump PU2 status is closed
 and pump PU3 status is closed
-RULE 16 ";" ";" ";" ";"
-if system time >= 139.460 ";"
-and system time <= 168 ";"
+RULE 16
+if system time >= 139.460
+and system time <= 168
 and tank T1 level below 4.585
 then pump PU1 status is open
 and pump PU2 status is open
 and pump PU3 status is open
-RULE 17 ";" ";" ";" ";"
+RULE 17
 if system clocktime >= 0 AM
 and system clocktime < 9.024 AM
 and tank T3 level above 6.582
 then pump PU4 status is closed
 ; ; ; ; ; ;
-RULE 64 ";" ";" ";" ";"
+RULE 64
 if system clocktime >= 0 AM
 and system clocktime < 9.024 AM
 and tank T3 level below 6.035
 then pump PU4 status is open
 ; ; ; ; ; ;
-RULE 18 ";" ";" ";" ";"
+RULE 18
 if system clocktime >= 9.024 AM
 and system clocktime < 8.161 PM
 and tank T3 level below 0.159
 then pump PU4 status is open
 ; ; ; ; ; ;
-RULE 19 ";" ";" ";" ";"
+RULE 19
 if system clocktime >= 9.024 AM
 and system clocktime < 8.161 PM
 and tank T3 level above 0.665
 then pump PU4 status is closed
 ; ; ; ; ; ;
-RULE 20 ";" ";" ";" ";"
+RULE 20
 if system clocktime >= 8.161 PM
 and system clocktime <= 11.9999 PM
 and tank T3 level above 6.420
 then pump PU4 status is closed
 ; ; ; ; ; ;
-RULE 21 ";" ";" ";" ";"
+RULE 21
 if system clocktime >= 8.161 PM
 and system clocktime <= 11.9999 PM
 and tank T3 level below 6.436
 then pump PU4 status is open
 ; ; ; ; ; ;
-RULE 22 ";" ";" ";" ";"
+RULE 22
 if system clocktime >= 0 AM
 and system clocktime < 8.980 AM
 and tank T4 level above 4.525
 then pump PU6 status is closed
-RULE 23 ";" ";" ";" ";"
+RULE 23
 if system clocktime >= 0 AM
 and system clocktime < 8.980 AM
 and tank T4 level below 4.453
 then pump PU6 status is open
-RULE 24 ";" ";" ";" ";"
+RULE 24
 if system clocktime >= 0 AM
 and system clocktime < 8.980 AM
 and tank T4 level above 4.590
 then pump PU7 status is closed
-RULE 25 ";" ";" ";" ";"
+RULE 25
 if system clocktime >= 0 AM
 and system clocktime < 8.980 AM
 and tank T4 level below 4.192
 then pump PU7 status is open
-RULE 26 ";" ";" ";" ";"
+RULE 26
 if system clocktime >= 8.980 AM
 and system clocktime < 7.961 PM
 and tank T4 level below 0.426
 then pump PU6 status is open
-RULE 27 ";" ";" ";" ";"
+RULE 27
 if system clocktime >= 8.980 AM
 and system clocktime < 7.961 PM
 and tank T4 level above 0.640
 then pump PU6 status is closed
-RULE 28 ";" ";" ";" ";"
+RULE 28
 if system clocktime >= 8.980 AM
 and system clocktime < 7.961 PM
 and tank T4 level below 0.300
 then pump PU7 status is open
-RULE 29 ";" ";" ";" ";"
+RULE 29
 if system clocktime >= 8.980 AM
 and system clocktime < 7.961 PM
 and tank T4 level above 0.474
 then pump PU7 status is closed
-RULE 30 ";" ";" ";" ";"
+RULE 30
 if system clocktime >= 7.961 PM
 and system clocktime <= 11.9999 PM
 and tank T4 level above 4.552
 then pump PU6 status is closed
-RULE 31 ";" ";" ";" ";"
+RULE 31
 if system clocktime >= 7.961 PM
 and system clocktime <= 11.9999 PM
 and tank T4 level below 4.290
 then pump PU6 status is open
-RULE 32 ";" ";" ";" ";"
+RULE 32
 if system clocktime >= 7.961 PM
 and system clocktime <= 11.9999 PM
 and tank T4 level above 4.646
 then pump PU7 status is closed
-RULE 33 ";" ";" ";" ";"
+RULE 33
 if system clocktime >= 7.961 PM
 and system clocktime <= 11.9999 PM
 and tank T4 level below 4.057
 then pump PU7 status is open
-RULE 34 ";" ";" ";" ";"
+RULE 34
 if system clocktime >= 0 AM
 and system clocktime < 8.979 AM
 and tank T7 level above 4.918
 then pump PU10 status is closed
-RULE 35 ";" ";" ";" ";"
+RULE 35
 if system clocktime >= 0 AM
 and system clocktime < 8.979 AM
 and tank T7 level below 4.714
 then pump PU10 status is open
-RULE 36 ";" ";" ";" ";"
+RULE 36
 if system clocktime >= 0 AM
 and system clocktime < 8.979 AM
 and tank T7 level above 4.779
 then pump PU11 status is closed
-RULE 37 ";" ";" ";" ";"
+RULE 37
 if system clocktime >= 0 AM
 and system clocktime < 8.979 AM
 and tank T7 level below 4.817
 then pump PU11 status is open
-RULE 38 ";" ";" ";" ";"
+RULE 38
 if system clocktime >= 8.979 AM
 and system clocktime < 8.180 PM
 and tank T7 level below 2.213
 then pump PU10 status is open
-RULE 39 ";" ";" ";" ";"
+RULE 39
 if system clocktime >= 8.979 AM
 and system clocktime < 8.180 PM
 and tank T7 level above 2.395
 then pump PU10 status is closed
-RULE 40 ";" ";" ";" ";"
+RULE 40
 if system clocktime >= 8.979 AM
 and system clocktime < 8.180 PM
 and tank T7 level below 2.171
 then pump PU11 status is open
-RULE 41 ";" ";" ";" ";"
+RULE 41
 if system clocktime >= 8.979 AM
 and system clocktime < 8.180 PM
 and tank T7 level above 2.242
 then pump PU11 status is closed
-RULE 42 ";" ";" ";" ";"
+RULE 42
 if system clocktime >= 8.180 PM
 and system clocktime <= 11.9999 PM
 and tank T7 level above 4.867
 then pump PU10 status is closed
-RULE 43 ";" ";" ";" ";"
+RULE 43
 if system clocktime >= 8.180 PM
 and system clocktime <= 11.9999 PM
 and tank T7 level below 4.774
 then pump PU10 status is open
-RULE 44 ";" ";" ";" ";"
+RULE 44
 if system clocktime >= 8.180 PM
 and system clocktime <= 11.9999 PM
 and tank T7 level above 5.018
 then pump PU11 status is closed
-RULE 45 ";" ";" ";" ";"
+RULE 45
 if system clocktime >= 8.180 PM
 and system clocktime <= 11.9999 PM
 and tank T7 level below 4.840
 then pump PU11 status is open
-RULE 46 ";" ";" ";" ";"
+RULE 46
 if system clocktime >= 0 AM
 and system clocktime < 8.988 AM
 and tank T5 level above 4.181
 then pump PU8 status is closed
-RULE 47 ";" ";" ";" ";"
+RULE 47
 if system clocktime >= 0 AM
 and system clocktime < 8.988 AM
 and tank T5 level below 4.438
 then pump PU8 status is open
-RULE 48 ";" ";" ";" ";"
+RULE 48
 if system clocktime >= 0 AM
 and system clocktime < 8.988 AM
 and tank T5 level above 4.475
 then pump PU9 status is closed
-RULE 49 ";" ";" ";" ";"
+RULE 49
 if system clocktime >= 0 AM
 and system clocktime < 8.988 AM
 and tank T5 level below 4.165
 then pump PU9 status is open
-RULE 50 ";" ";" ";" ";"
+RULE 50
 if system clocktime >= 8.988 AM
 and system clocktime < 8.123 PM
 and tank T5 level below 0.314
 then pump PU8 status is open
-RULE 51 ";" ";" ";" ";"
+RULE 51
 if system clocktime >= 8.988 AM
 and system clocktime < 8.123 PM
 and tank T5 level above 0.522
 then pump PU8 status is closed
-RULE 52 ";" ";" ";" ";"
+RULE 52
 if system clocktime >= 8.988 AM
 and system clocktime < 8.123 PM
 and tank T5 level below 0.265
 then pump PU9 status is open
-RULE 53 ";" ";" ";" ";"
+RULE 53
 if system clocktime >= 8.988 AM
 and system clocktime < 8.123 PM
 and tank T5 level above 0.557
 then pump PU9 status is closed
-RULE 54 ";" ";" ";" ";"
+RULE 54
 if system clocktime >= 8.123 PM
 and system clocktime <= 11.9999 PM
 and tank T5 level above 4.342
 then pump PU8 status is closed
-RULE 55 ";" ";" ";" ";"
+RULE 55
 if system clocktime >= 8.123 PM
 and system clocktime <= 11.9999 PM
 and tank T5 level below 4.170
 then pump PU8 status is open
-RULE 56 ";" ";" ";" ";"
+RULE 56
 if system clocktime >= 8.123 PM
 and system clocktime <= 11.9999 PM
 and tank T5 level above 4.501
 then pump PU9 status is closed
-RULE 57 ";" ";" ";" ";"
+RULE 57
 if system clocktime >= 8.123 PM
 and system clocktime <= 11.9999 PM
 and tank T5 level below 4.131
 then pump PU9 status is open
-RULE 58 ";" ";" ";" ";"
+RULE 58
 if system clocktime >= 0 AM
 and system clocktime < 8.997 AM
 and tank T1 level above 6.376
 then pump PU1 status is closed
 ; ; ; ; ; ;
 ; ; ; ; ; ;
-RULE 59 ";" ";" ";" ";"
+RULE 59
 if system clocktime >= 0 AM
 and system clocktime < 8.997 AM
 and tank T1 level below 6.210
 then pump PU1 status is open
 ; ; ; ; ; ;
 ; ; ; ; ; ;
-RULE 60 ";" ";" ";" ";"
+RULE 60
 if system clocktime >= 8.997 AM
 and system clocktime < 5.788 PM
 and tank T1 level below 0.876
 then pump PU1 status is open
 ; ; ; ; ; ;
 ; ; ; ; ; ;
-RULE 61 ";" ";" ";" ";"
+RULE 61
 if system clocktime >= 8.997 AM
 and system clocktime < 5.788 PM
 and tank T1 level above 0.853
 then pump PU1 status is closed
 ; ; ; ; ; ;
 ; ; ; ; ; ;
-RULE 62 ";" ";" ";" ";"
+RULE 62
 if system clocktime >= 5.788 PM
 and system clocktime <= 11.9999 PM
 and tank T1 level above 6.465
 then pump PU1 status is closed
 ; ; ; ; ; ;
 ; ; ; ; ; ;
-RULE 63 ";" ";" ";" ";"
+RULE 63
 if system clocktime >= 5.788 PM
 and system clocktime <= 11.9999 PM
 and tank T1 level below 6.289
 then pump PU1 status is open
 ; ; ; ; ; ;
 ; ; ; ; ; ;
-RULE 17b ";" ";" ";" ";"
+RULE 17b
 if system clocktime >= 0 AM
 and system clocktime < 8.979 AM
 and tank T3 level above 6.726
 then pump PU5 status is closed
-RULE 64b ";" ";" ";" ";"
+RULE 64b
 if system clocktime >= 0 AM
 and system clocktime < 8.979 AM
 and tank T3 level below 6.373
 then pump PU5 status is open
-RULE 18b ";" ";" ";" ";"
+RULE 18b
 if system clocktime >= 8.979 AM
 and system clocktime < 7.948 PM
 and tank T3 level below 0.186
 then pump PU5 status is open
-RULE 19b ";" ";" ";" ";"
+RULE 19b
 if system clocktime >= 8.979 AM
 and system clocktime < 7.948 PM
 and tank T3 level above 0.689
 then pump PU5 status is closed
-RULE 20b ";" ";" ";" ";"
+RULE 20b
 if system clocktime >= 7.948 PM
 and system clocktime <= 11.9999 PM
 and tank T3 level above 6.565
 then pump PU5 status is closed
-RULE 21b ";" ";" ";" ";"
+RULE 21b
 if system clocktime >= 7.948 PM
 and system clocktime <= 11.9999 PM
 and tank T3 level below 5.583
 then pump PU5 status is open
-RULE 58b ";" ";" ";" ";"
+RULE 58b
 if system clocktime >= 0 AM
 and system clocktime < 8.909 AM
 and tank T1 level above 6.390
 then pump PU2 status is closed
-RULE 59b ";" ";" ";" ";"
+RULE 59b
 if system clocktime >= 0 AM
 and system clocktime < 8.909 AM
 and tank T1 level below 6.407
 then pump PU2 status is open
-RULE 60b ";" ";" ";" ";"
+RULE 60b
 if system clocktime >= 8.909 AM
 and system clocktime < 5.959 PM
 and tank T1 level below 0.784
 then pump PU2 status is open
-RULE 61b ";" ";" ";" ";"
+RULE 61b
 if system clocktime >= 8.909 AM
 and system clocktime < 5.959 PM
 and tank T1 level above 0.907
 then pump PU2 status is closed
-RULE 62b ";" ";" ";" ";"
+RULE 62b
 if system clocktime >= 5.959 PM
 and system clocktime <= 11.9999 PM
 and tank T1 level above 6.457
 then pump PU2 status is closed
-RULE 63b ";" ";" ";" ";"
+RULE 63b
 if system clocktime >= 5.959 PM
 and system clocktime <= 11.9999 PM
 and tank T1 level below 6.172
 then pump PU2 status is open
-RULE 58c ";" ";" ";" ";"
+RULE 58c
 if system clocktime >= 0 AM
 and system clocktime < 8.999 AM
 and tank T1 level above 6.653
 then pump PU3 status is closed
-RULE 59c ";" ";" ";" ";"
+RULE 59c
 if system clocktime >= 0 AM
 and system clocktime < 8.999 AM
 and tank T1 level below 6.168
 then pump PU3 status is open
-RULE 60c ";" ";" ";" ";"
+RULE 60c
 if system clocktime >= 8.999 AM
 and system clocktime < 5.813 PM
 and tank T1 level below 0.827
 then pump PU3 status is open
-RULE 61c ";" ";" ";" ";"
+RULE 61c
 if system clocktime >= 8.999 AM
 and system clocktime < 5.813 PM
 and tank T1 level above 1.038
 then pump PU3 status is closed
-RULE 62c ";" ";" ";" ";"
+RULE 62c
 if system clocktime >= 5.813 PM
 and system clocktime <= 11.9999 PM
 and tank T1 level above 6.514
 then pump PU2 status is closed
-RULE 63c ";" ";" ";" ";"
+RULE 63c
 if system clocktime >= 5.813 PM
 and system clocktime <= 11.9999 PM
 and tank T1 level below 5.866

@@ -76,3 +76,6 @@ output/
 
 # Summary files (can be regenerated)
 summary.json
+
+# Stress test results (generated)
+stress_test_results.json
