@@ -1,0 +1,229 @@
+{
+  "timestamp": "2026-02-02T09:29:06.556861",
+  "source": "test_results",
+  "total_simulations": 0,
+  "statistics": {
+    "min_seconds": 0.09333300590515137,
+    "max_seconds": 470.5270299911499,
+    "avg_seconds": 32.50115935890763,
+    "median_seconds": 0.11644601821899414,
+    "min_minutes": 0.0015555500984191894,
+    "max_minutes": 7.842117166519165,
+    "avg_minutes": 0.5416859893151271,
+    "median_minutes": 0.001940766970316569
+  },
+  "distribution": {
+    "< 1 second": 38,
+    "1-5 seconds": 0,
+    "5-10 seconds": 3,
+    "10-30 seconds": 3,
+    "30-60 seconds": 4,
+    "1-5 minutes": 3,
+    "5-10 minutes": 3,
+    "> 10 minutes": 0
+  },
+  "fastest": [
+    {
+      "file": "EPASWMM Example Files/SWMM5_NCIMM/pump_scatter_SI_Units.inp",
+      "simulation_id": "7024d006-2858-4f2a-8019-0ae9d28fc2c1",
+      "submit_time": "2026-02-01T17:43:41.844329",
+      "submit_duration": 0.5037572383880615,
+      "status": "submitted",
+      "error": null,
+      "final_status": "completed",
+      "execution_time": 0.09333300590515137
+    },
+    {
+      "file": "EPASWMM Example Files/SWMM5_NCIMM/pump3_scatter_HW.inp",
+      "simulation_id": "5c26c66e-8018-4433-8e0b-0b3a9964841a",
+      "submit_time": "2026-02-01T17:43:41.850636",
+      "submit_duration": 0.5122818946838379,
+      "status": "submitted",
+      "error": null,
+      "final_status": "completed",
+      "execution_time": 0.09337663650512695
+    },
+    {
+      "file": "EPASWMM Example Files/SWMM5_NCIMM/reverse_flow.inp",
+      "simulation_id": "98feaca6-87ee-4743-9e4f-4f43c4c36941",
+      "submit_time": "2026-02-01T17:43:42.249682",
+      "submit_duration": 0.6564168930053711,
+      "status": "submitted",
+      "error": null,
+      "final_status": "completed",
+      "execution_time": 0.09663629531860352
+    },
+    {
+      "file": "EPASWMM Example Files/SWMM5_NCIMM/noInflow_1200Nodes.inp",
+      "simulation_id": "7f2a5350-2ffa-4ac2-92cc-07034c3aeb26",
+      "submit_time": "2026-02-01T17:43:41.641839",
+      "submit_duration": 0.8871910572052002,
+      "status": "submitted",
+      "error": null,
+      "final_status": "completed",
+      "execution_time": 0.09679412841796875
+    },
+    {
+      "file": "EPASWMM Example Files/SWMM5_NCIMM/sampleRam.inp",
+      "simulation_id": "66ecc127-e66d-4f63-a444-ab519cac5a6f",
+      "submit_time": "2026-02-01T17:43:42.532474",
+      "submit_duration": 0.8903458118438721,
+      "status": "submitted",
+      "error": null,
+      "final_status": "completed",
+      "execution_time": 0.09846091270446777
+    },
+    {
+      "file": "EPASWMM Example Files/SWMM5_NCIMM/skeleton.inp",
+      "simulation_id": "9f620499-659f-451a-93fc-d1de9da94988",
+      "submit_time": "2026-02-01T17:43:42.715686",
+      "submit_duration": 0.8616771697998047,
+      "status": "submitted",
+      "error": null,
+      "final_status": "completed",
+      "execution_time": 0.09875702857971191
+    },
+    {
+      "file": "EPASWMM Example Files/SWMM5_NCIMM/small_rdii_example.inp",
+      "simulation_id": "9f606d15-7ca7-4498-9fa8-4f11a68e2256",
+      "submit_time": "2026-02-01T17:43:42.984994",
+      "submit_duration": 1.1152281761169434,
+      "status": "submitted",
+      "error": null,
+      "final_status": "completed",
+      "execution_time": 0.09963083267211914
+    },
+    {
+      "file": "EPASWMM Example Files/SWMM5_NCIMM/pump3_scatter.inp",
+      "simulation_id": "d1fb2712-3d0d-46e6-ae4c-25fdd1cfe14d",
+      "submit_time": "2026-02-01T17:43:41.853929",
+      "submit_duration": 0.5157470703125,
+      "status": "submitted",
+      "error": null,
+      "final_status": "completed",
+      "execution_time": 0.10022211074829102
+    },
+    {
+      "file": "EPASWMM Example Files/SWMM5_NCIMM/transect_small.inp",
+      "simulation_id": "b312d493-00f9-4bfa-8e2c-58ccf042bebd",
+      "submit_time": "2026-02-01T17:43:43.861936",
+      "submit_duration": 1.1705222129821777,
+      "status": "submitted",
+      "error": null,
+      "final_status": "completed",
+      "execution_time": 0.10042190551757812
+    },
+    {
+      "file": "EPASWMM Example Files/SWMM5_NCIMM/timeoff.inp",
+      "simulation_id": "3e876a64-1d60-43d3-8f71-26639f4e4162",
+      "submit_time": "2026-02-01T17:43:43.761982",
+      "submit_duration": 1.0898051261901855,
+      "status": "submitted",
+      "error": null,
+      "final_status": "completed",
+      "execution_time": 0.1017141342163086
+    }
+  ],
+  "slowest": [
+    {
+      "file": "EPASWMM Example Files/SWMM5_NCIMM/sea_level_fm.inp",
+      "simulation_id": "f9d9a92d-5dd5-4990-885a-ebe461548138",
+      "submit_time": "2026-02-01T17:43:42.672126",
+      "submit_duration": 0.8661410808563232,
+      "status": "submitted",
+      "error": null,
+      "final_status": "completed",
+      "execution_time": 35.87085008621216
+    },
+    {
+      "file": "EPASWMM Example Files/SWMM5_NCIMM/many_lakes.inp",
+      "simulation_id": "723fd5bd-af3e-48c3-bf64-4d1396fe75ab",
+      "submit_time": "2026-02-01T17:43:41.338289",
+      "submit_duration": 0.9135091304779053,
+      "status": "submitted",
+      "error": null,
+      "final_status": "completed",
+      "execution_time": 46.15119218826294
+    },
+    {
+      "file": "EPASWMM Example Files/SWMM5_NCIMM/pitfalls.inp",
+      "simulation_id": "30f82c71-184d-40d6-bcbf-a46b365992f1",
+      "submit_time": "2026-02-01T17:43:41.593105",
+      "submit_duration": 0.6335229873657227,
+      "status": "submitted",
+      "error": null,
+      "final_status": "completed",
+      "execution_time": 51.1721031665802
+    },
+    {
+      "file": "EPASWMM Example Files/SWMM5_NCIMM/washington.inp",
+      "simulation_id": "023f0423-6f5f-4bd3-9d28-60b537c8c31f",
+      "submit_time": "2026-02-01T17:43:44.736753",
+      "submit_duration": 1.1261377334594727,
+      "status": "submitted",
+      "error": null,
+      "final_status": "completed",
+      "execution_time": 51.27392578125
+    },
+    {
+      "file": "EPASWMM Example Files/SWMM5_NCIMM/force_main_example.inp",
+      "simulation_id": "3b388562-224d-4323-976f-9f39b16c4197",
+      "submit_time": "2026-02-01T17:43:40.101836",
+      "submit_duration": 0.7505028247833252,
+      "status": "submitted",
+      "error": null,
+      "final_status": "completed",
+      "execution_time": 66.5764548778534
+    },
+    {
+      "file": "EPASWMM Example Files/SWMM5_NCIMM/Test_Inet_Offset_3Foot.inp",
+      "simulation_id": "e8c09813-f45f-408c-bc18-8319b353810d",
+      "submit_time": "2026-02-01T17:43:38.950683",
+      "submit_duration": 1.0422508716583252,
+      "status": "submitted",
+      "error": null,
+      "final_status": "completed",
+      "execution_time": 76.82471990585327
+    },
+    {
+      "file": "EPASWMM Example Files/SWMM5_NCIMM/bend.inp",
+      "simulation_id": "f889f39f-bed5-48f5-b9b4-16272c42a5a4",
+      "submit_time": "2026-02-01T17:43:39.871428",
+      "submit_duration": 1.1350479125976562,
+      "status": "submitted",
+      "error": null,
+      "final_status": "completed",
+      "execution_time": 163.52430605888367
+    },
+    {
+      "file": "EPASWMM Example Files/SWMM5_NCIMM/si_nippean.inp",
+      "simulation_id": "50928000-844c-4928-afff-edb9dcbecec6",
+      "submit_time": "2026-02-01T17:43:42.542368",
+      "submit_duration": 0.6979489326477051,
+      "status": "submitted",
+      "error": null,
+      "final_status": "completed",
+      "execution_time": 348.2343120574951
+    },
+    {
+      "file": "EPASWMM Example Files/SWMM5_NCIMM/swsflooding.inp",
+      "simulation_id": "cbe9f540-7c36-47d8-a3b3-3fc1b2872cc6",
+      "submit_time": "2026-02-01T17:43:43.166514",
+      "submit_duration": 0.9167790412902832,
+      "status": "submitted",
+      "error": null,
+      "final_status": "completed",
+      "execution_time": 353.06377720832825
+    },
+    {
+      "file": "EPASWMM Example Files/SWMM5_NCIMM/indy_small.inp",
+      "simulation_id": "88011ee7-25d8-4c74-8d5b-34f57a0aee3f",
+      "submit_time": "2026-02-01T17:43:40.946192",
+      "submit_duration": 1.0650970935821533,
+      "status": "submitted",
+      "error": null,
+      "final_status": "completed",
+      "execution_time": 470.5270299911499
+    }
+  ]
+}
