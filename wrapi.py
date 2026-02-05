@@ -226,6 +226,7 @@ class WRAPIClient:
         start_time = time.time()
         last_status = None
         seen_log_messages = set()
+        last_progress = None
         
         print(f"   Polling logs every {interval}s...")
         
@@ -239,6 +240,19 @@ class WRAPIClient:
             
             # Get latest logs to show progress
             logs = self.get_simulation_logs(sim_id, limit=20)
+            
+            # Extract and display progress
+            progress = extract_progress_from_logs(logs)
+            if progress is None and status == 'running':
+                progress = calculate_time_progress(sim)
+            
+            # Show progress bar if available
+            if progress is not None and progress != last_progress:
+                bar_length = 30
+                filled = int(bar_length * progress / 100)
+                bar = '█' * filled + '░' * (bar_length - filled)
+                print(f"   Progress: [{bar}] {progress:.1f}%")
+                last_progress = progress
             
             # Display new log messages (newest first in response, so reverse for display)
             for log in reversed(logs):
@@ -269,6 +283,8 @@ class WRAPIClient:
             
             # Check if completed or failed
             if status in ['completed', 'failed']:
+                if progress is not None:
+                    print(f"   Progress: [{'█' * 30}] 100.0%")
                 return sim
             
             # Update status display if changed
@@ -279,6 +295,62 @@ class WRAPIClient:
         
         print(f"⚠️  Timeout waiting for simulation after {timeout}s")
         return self.get_simulation(sim_id)
+
+
+def extract_progress_from_logs(logs: List[dict]) -> Optional[float]:
+    """Extract progress percentage from log messages."""
+    import re
+    
+    # Look for progress indicators in logs
+    for log in reversed(logs):  # Check newest first
+        msg = log.get('message', '').lower()
+        
+        # Look for percentage patterns
+        patterns = [
+            r'(\d+(?:\.\d+)?)\s*%',  # "50%" or "50.5%"
+            r'progress[:\s]+(\d+(?:\.\d+)?)\s*%',  # "Progress: 50%"
+            r'(\d+(?:\.\d+)?)\s*percent',  # "50 percent"
+        ]
+        
+        for pattern in patterns:
+            match = re.search(pattern, msg)
+            if match:
+                try:
+                    return float(match.group(1))
+                except:
+                    pass
+    
+    return None
+
+
+def calculate_time_progress(sim: dict) -> Optional[float]:
+    """Calculate progress based on elapsed time vs estimated total."""
+    started_at = sim.get('started_at')
+    if not started_at:
+        return None
+    
+    try:
+        started = datetime.fromisoformat(started_at.replace('Z', '+00:00'))
+        elapsed = (datetime.now(started.tzinfo) - started).total_seconds()
+        
+        # For SWMM/EPANET, most simulations complete in seconds to minutes
+        # We can estimate based on status and elapsed time
+        status = sim.get('status', '')
+        
+        if status == 'running':
+            # If running for more than 30 seconds, likely a longer simulation
+            # Estimate based on typical ranges (most complete in 1-5 minutes)
+            if elapsed < 10:
+                return min(50, elapsed / 10 * 50)  # Early stage
+            elif elapsed < 60:
+                return min(80, 50 + (elapsed - 10) / 50 * 30)  # Mid stage
+            else:
+                return min(95, 80 + (elapsed - 60) / 300 * 15)  # Late stage
+        
+    except:
+        pass
+    
+    return None
 
 
 def format_timestamp(ts: str) -> str:
@@ -368,8 +440,64 @@ def cmd_run(args):
         print(f"To get files:    python wrapi.py files {sim_id}")
 
 
+def extract_progress_from_logs(logs: List[dict]) -> Optional[float]:
+    """Extract progress percentage from log messages."""
+    import re
+    
+    # Look for progress indicators in logs
+    for log in reversed(logs):  # Check newest first
+        msg = log.get('message', '').lower()
+        
+        # Look for percentage patterns
+        patterns = [
+            r'(\d+(?:\.\d+)?)\s*%',  # "50%" or "50.5%"
+            r'progress[:\s]+(\d+(?:\.\d+)?)\s*%',  # "Progress: 50%"
+            r'(\d+(?:\.\d+)?)\s*percent',  # "50 percent"
+        ]
+        
+        for pattern in patterns:
+            match = re.search(pattern, msg)
+            if match:
+                try:
+                    return float(match.group(1))
+                except:
+                    pass
+    
+    return None
+
+
+def calculate_time_progress(sim: dict) -> Optional[float]:
+    """Calculate progress based on elapsed time vs estimated total."""
+    started_at = sim.get('started_at')
+    if not started_at:
+        return None
+    
+    try:
+        started = datetime.fromisoformat(started_at.replace('Z', '+00:00'))
+        elapsed = (datetime.now(started.tzinfo) - started).total_seconds()
+        
+        # For SWMM/EPANET, most simulations complete in seconds to minutes
+        # We can estimate based on status and elapsed time
+        status = sim.get('status', '')
+        
+        if status == 'running':
+            # If running for more than 30 seconds, likely a longer simulation
+            # Estimate based on typical ranges (most complete in 1-5 minutes)
+            if elapsed < 10:
+                return min(50, elapsed / 10 * 50)  # Early stage
+            elif elapsed < 60:
+                return min(80, 50 + (elapsed - 10) / 50 * 30)  # Mid stage
+            else:
+                return min(95, 80 + (elapsed - 60) / 300 * 15)  # Late stage
+        
+    except:
+        pass
+    
+    return None
+
+
 def cmd_status(args):
-    """Check simulation status."""
+    """Check simulation status with progress information."""
     client = WRAPIClient()
     sim = client.get_simulation(args.id)
     
@@ -382,11 +510,71 @@ def cmd_status(args):
         print(f"   Created: {format_timestamp(sim['created_at'])}")
         
         if sim.get('started_at'):
+            started = datetime.fromisoformat(sim['started_at'].replace('Z', '+00:00'))
             print(f"   Started: {format_timestamp(sim['started_at'])}")
+            
+            # Calculate elapsed time
+            elapsed = (datetime.now(started.tzinfo) - started).total_seconds()
+            if elapsed < 60:
+                print(f"   Elapsed: {elapsed:.1f} seconds")
+            else:
+                print(f"   Elapsed: {elapsed/60:.1f} minutes")
+        
         if sim.get('completed_at'):
             print(f"   Completed: {format_timestamp(sim['completed_at'])}")
+            
+            # Calculate total execution time
+            if sim.get('started_at'):
+                started = datetime.fromisoformat(sim['started_at'].replace('Z', '+00:00'))
+                completed = datetime.fromisoformat(sim['completed_at'].replace('Z', '+00:00'))
+                exec_time = (completed - started).total_seconds()
+                print(f"   Duration: {exec_time:.2f} seconds ({exec_time/60:.2f} minutes)")
+        
         if sim.get('ended_at'):
             print(f"   Ended: {format_timestamp(sim['ended_at'])}")
+        
+        # Show progress if running
+        if sim.get('status') == 'running':
+            print(f"\n⏳ Progress:")
+            
+            # Try to get progress from logs
+            logs = client.get_simulation_logs(args.id, limit=50)
+            log_progress = extract_progress_from_logs(logs)
+            
+            if log_progress is not None:
+                print(f"   {log_progress:.1f}% complete (from logs)")
+                # Show progress bar
+                bar_length = 30
+                filled = int(bar_length * log_progress / 100)
+                bar = '█' * filled + '░' * (bar_length - filled)
+                print(f"   [{bar}] {log_progress:.1f}%")
+            else:
+                # Estimate based on elapsed time
+                time_progress = calculate_time_progress(sim)
+                if time_progress is not None:
+                    print(f"   ~{time_progress:.1f}% complete (estimated from elapsed time)")
+                    bar_length = 30
+                    filled = int(bar_length * time_progress / 100)
+                    bar = '█' * filled + '░' * (bar_length - filled)
+                    print(f"   [{bar}] {time_progress:.1f}%")
+                else:
+                    print(f"   Status: Running (check logs for details)")
+            
+            # Show recent log messages
+            if logs:
+                print(f"\n📋 Recent Log Messages:")
+                for log in logs[-3:]:  # Show last 3 messages
+                    msg = log.get('message', '')
+                    ts = log.get('timestamp', '')
+                    try:
+                        ts_clean = ts.replace('Z', '+00:00')
+                        dt = datetime.fromisoformat(ts_clean)
+                        ts_short = dt.strftime('%H:%M:%S')
+                    except:
+                        ts_short = ts[:8] if ts else ''
+                    print(f"   [{ts_short}] {msg}")
+        else:
+            print()
 
 
 def cmd_logs(args):
