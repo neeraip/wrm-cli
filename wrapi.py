@@ -502,6 +502,36 @@ def download_results_to_timestamped_folder(client: WRAPIClient, sim_id: str, fil
     total_files = downloaded_count + (1 if ini_processed else 0)
     if total_files > 0:
         print(f"\n✅ Downloaded {total_files} file(s) to {sim_folder}/")
+        
+        # Create a zip file containing all downloaded files
+        # Use the input file's base name for the zip file
+        if input_file_path and not input_file_path.startswith('http'):
+            zip_basename = Path(input_file_path).stem
+        else:
+            # Try to get name from downloaded files
+            inp_files = list(sim_folder.glob('*.inp'))
+            if inp_files:
+                zip_basename = inp_files[0].stem
+            else:
+                zip_basename = f"simulation_{sim_id[:8]}"
+        
+        zip_filename = f"{zip_basename}.zip"
+        zip_path = sim_folder / zip_filename
+        
+        print(f"\n📦 Creating zip archive...")
+        try:
+            with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zf:
+                for file_path in sim_folder.iterdir():
+                    if file_path.is_file() and file_path.suffix != '.zip':
+                        zf.write(file_path, file_path.name)
+            
+            zip_size_str = format_size(zip_path.stat().st_size)
+            print(f"   ✅ {zip_filename:40} ({zip_size_str})")
+            print(f"\n📁 Results folder: {sim_folder}/")
+            print(f"   • Individual files available for download")
+            print(f"   • All files bundled in: {zip_filename}")
+        except Exception as e:
+            print(f"   ❌ Failed to create zip: {e}")
     else:
         print(f"\n⚠️  No files were downloaded")
 
