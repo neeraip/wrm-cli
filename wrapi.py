@@ -371,6 +371,65 @@ def format_size(size: int) -> str:
     return f"{size:.1f} TB"
 
 
+def download_results_to_timestamped_folder(client: WRAPIClient, sim_id: str, files: List[dict]):
+    """Download simulation results to a timestamped folder."""
+    # Create results directory
+    results_dir = Path("results")
+    results_dir.mkdir(exist_ok=True)
+    
+    # Create timestamped folder (format: YYYYMMDD_HHMMSS)
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    sim_folder = results_dir / f"{timestamp}_{sim_id[:8]}"
+    sim_folder.mkdir(parents=True, exist_ok=True)
+    
+    print(f"\n⬇️  Downloading results to: {sim_folder}/")
+    
+    downloaded_count = 0
+    for f in files:
+        file_type = f.get('type', 'unknown')
+        url = f.get('url', '')
+        
+        if not url:
+            continue
+        
+        # Determine filename based on type
+        if file_type == 'input':
+            filename = 'input.inp'
+        elif file_type == 'output':
+            filename = 'output.out'
+        elif file_type == 'report':
+            filename = 'report.rpt'
+        else:
+            # Extract filename from URL
+            filename = url.split('/')[-1]
+            if not filename or '.' not in filename:
+                filename = f"{file_type}.{file_type}"
+        
+        filepath = sim_folder / filename
+        
+        try:
+            response = requests.get(url, timeout=60, stream=True)
+            response.raise_for_status()
+            
+            # Download file
+            with open(filepath, 'wb') as out_file:
+                for chunk in response.iter_content(chunk_size=8192):
+                    if chunk:
+                        out_file.write(chunk)
+            
+            size_str = format_size(filepath.stat().st_size)
+            print(f"   ✅ {filename:20} ({size_str})")
+            downloaded_count += 1
+            
+        except Exception as e:
+            print(f"   ❌ Failed to download {filename}: {e}")
+    
+    if downloaded_count > 0:
+        print(f"\n✅ Downloaded {downloaded_count} file(s) to {sim_folder}/")
+    else:
+        print(f"\n⚠️  No files were downloaded")
+
+
 def cmd_run(args):
     """Run a simulation."""
     client = WRAPIClient()
@@ -423,6 +482,9 @@ def cmd_run(args):
                     for f in files:
                         size_str = format_size(f.get('size', 0))
                         print(f"   [{f['type']:10}] {size_str:>10}  {f['url']}")
+                    
+                    # Automatically download results to timestamped folder
+                    download_results_to_timestamped_folder(client, sim_id, files)
                 else:
                     print("   (Files still uploading, use 'wrapi.py files' to check later)")
                     
