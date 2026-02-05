@@ -375,6 +375,7 @@ def copy_and_update_ini_file(input_file_path: str, results_folder: Path) -> bool
     """
     Check for a .ini file alongside the input .inp file.
     If found, copy it to results folder and update Current=1 under [Results].
+    Preserves the original .ini filename.
     
     Returns True if .ini file was processed, False otherwise.
     """
@@ -386,7 +387,9 @@ def copy_and_update_ini_file(input_file_path: str, results_folder: Path) -> bool
     if not ini_path.exists():
         return False
     
-    print(f"\n📋 Found .ini file: {ini_path.name}")
+    # Preserve original filename
+    ini_filename = ini_path.name
+    print(f"\n📋 Found .ini file: {ini_filename}")
     
     try:
         # Read the .ini file and update Current=1 under [Results]
@@ -417,13 +420,13 @@ def copy_and_update_ini_file(input_file_path: str, results_folder: Path) -> bool
         if inside_results and not found_current:
             updated_lines.append('Current=1\n')
         
-        # Write updated .ini file to results folder
-        dest_ini_path = results_folder / 'config.ini'
+        # Write updated .ini file to results folder with original filename
+        dest_ini_path = results_folder / ini_filename
         with open(dest_ini_path, 'w', encoding='utf-8') as file:
             file.writelines(updated_lines)
         
         size_str = format_size(dest_ini_path.stat().st_size)
-        print(f"   ✅ config.ini           ({size_str}) - Updated Current=1 under [Results]")
+        print(f"   ✅ {ini_filename:40} ({size_str}) - Updated Current=1 under [Results]")
         return True
         
     except Exception as e:
@@ -432,7 +435,9 @@ def copy_and_update_ini_file(input_file_path: str, results_folder: Path) -> bool
 
 
 def download_results_to_timestamped_folder(client: WRAPIClient, sim_id: str, files: List[dict], input_file_path: Optional[str] = None):
-    """Download simulation results to a timestamped folder."""
+    """Download simulation results to a timestamped folder, preserving original filenames."""
+    from urllib.parse import unquote
+    
     # Create results directory
     results_dir = Path("results")
     results_dir.mkdir(exist_ok=True)
@@ -452,17 +457,22 @@ def download_results_to_timestamped_folder(client: WRAPIClient, sim_id: str, fil
         if not url:
             continue
         
-        # Determine filename based on type
-        if file_type == 'input':
-            filename = 'input.inp'
-        elif file_type == 'output':
-            filename = 'output.out'
-        elif file_type == 'report':
-            filename = 'report.rpt'
+        # Extract original filename from URL and decode URL encoding
+        # URLs like: .../Raytown%20WDS-290%20Calibration%20Model.out
+        url_filename = unquote(url.split('/')[-1])
+        
+        # Use the original filename from URL (preserves the model name)
+        if url_filename and '.' in url_filename:
+            filename = url_filename
         else:
-            # Extract filename from URL
-            filename = url.split('/')[-1]
-            if not filename or '.' not in filename:
+            # Fallback to generic names if URL doesn't have proper filename
+            if file_type == 'input':
+                filename = 'input.inp'
+            elif file_type == 'output':
+                filename = 'output.out'
+            elif file_type == 'report':
+                filename = 'report.rpt'
+            else:
                 filename = f"{file_type}.{file_type}"
         
         filepath = sim_folder / filename
@@ -478,7 +488,7 @@ def download_results_to_timestamped_folder(client: WRAPIClient, sim_id: str, fil
                         out_file.write(chunk)
             
             size_str = format_size(filepath.stat().st_size)
-            print(f"   ✅ {filename:20} ({size_str})")
+            print(f"   ✅ {filename:40} ({size_str})")
             downloaded_count += 1
             
         except Exception as e:
