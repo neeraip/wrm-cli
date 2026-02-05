@@ -371,7 +371,67 @@ def format_size(size: int) -> str:
     return f"{size:.1f} TB"
 
 
-def download_results_to_timestamped_folder(client: WRAPIClient, sim_id: str, files: List[dict]):
+def copy_and_update_ini_file(input_file_path: str, results_folder: Path) -> bool:
+    """
+    Check for a .ini file alongside the input .inp file.
+    If found, copy it to results folder and update Current=1 under [Results].
+    
+    Returns True if .ini file was processed, False otherwise.
+    """
+    input_path = Path(input_file_path)
+    
+    # Look for .ini file with same base name
+    ini_path = input_path.with_suffix('.ini')
+    
+    if not ini_path.exists():
+        return False
+    
+    print(f"\n📋 Found .ini file: {ini_path.name}")
+    
+    try:
+        # Read the .ini file and update Current=1 under [Results]
+        updated_lines = []
+        inside_results = False
+        found_current = False
+        
+        with open(ini_path, 'r', encoding='utf-8', errors='replace') as file:
+            for line in file:
+                if line.strip() == '[Results]':
+                    inside_results = True
+                    updated_lines.append(line)
+                elif inside_results and line.strip().startswith('Current='):
+                    updated_lines.append('Current=1\n')
+                    inside_results = False
+                    found_current = True
+                elif line.strip().startswith('[') and inside_results:
+                    # New section started without finding Current=
+                    # Add Current=1 before the new section
+                    if not found_current:
+                        updated_lines.append('Current=1\n')
+                    inside_results = False
+                    updated_lines.append(line)
+                else:
+                    updated_lines.append(line)
+        
+        # If [Results] was the last section and had no Current=
+        if inside_results and not found_current:
+            updated_lines.append('Current=1\n')
+        
+        # Write updated .ini file to results folder
+        dest_ini_path = results_folder / 'config.ini'
+        with open(dest_ini_path, 'w', encoding='utf-8') as file:
+            file.writelines(updated_lines)
+        
+        size_str = format_size(dest_ini_path.stat().st_size)
+        print(f"   ✅ config.ini           ({size_str}) - Updated Current=1 under [Results]")
+        return True
+        
+    except Exception as e:
+        print(f"   ❌ Failed to process .ini file: {e}")
+        return False
+
+
+def download_results_to_timestamped_folder(client: WRAPIClient, sim_id: str, files: List[dict], input_file_path: Optional[str] = None):
     """Download simulation results to a timestamped folder."""
     # Create results directory
     results_dir = Path("results")
@@ -424,8 +484,14 @@ def download_results_to_timestamped_folder(client: WRAPIClient, sim_id: str, fil
         except Exception as e:
             print(f"   ❌ Failed to download {filename}: {e}")
     
-    if downloaded_count > 0:
-        print(f"\n✅ Downloaded {downloaded_count} file(s) to {sim_folder}/")
+    # Check for and process .ini file if input file path is provided
+    ini_processed = False
+    if input_file_path and not input_file_path.startswith('http'):
+        ini_processed = copy_and_update_ini_file(input_file_path, sim_folder)
+    
+    total_files = downloaded_count + (1 if ini_processed else 0)
+    if total_files > 0:
+        print(f"\n✅ Downloaded {total_files} file(s) to {sim_folder}/")
     else:
         print(f"\n⚠️  No files were downloaded")
 
@@ -484,7 +550,8 @@ def cmd_run(args):
                         print(f"   [{f['type']:10}] {size_str:>10}  {f['url']}")
                     
                     # Automatically download results to timestamped folder
-                    download_results_to_timestamped_folder(client, sim_id, files)
+                    # Pass input_source to check for .ini files alongside the input file
+                    download_results_to_timestamped_folder(client, sim_id, files, input_source)
                 else:
                     print("   (Files still uploading, use 'wrapi.py files' to check later)")
                     
