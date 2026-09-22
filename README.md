@@ -304,3 +304,18 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 [GitHub](https://github.com/neeraip) • [API Docs](https://docs.wrm.neer.io/) • [Support](mailto:support@neer.ai)
 
 </div>
+
+## 🧪 Console model-rail smoke test
+
+`scripts/console_model_rail_smoke.py` pushes ten models from this corpus through the NEER Console hydraulic-model rail end to end: import the `.inp`, wait for the parse, change the report step and one cross section through the model data API, read them back, run the simulation through Console, then check that `report.json`, the Zarr cube and Parquet were produced and that both edits reached the engine. Run it before releasing `swmm-utils`, `lambda-importer` or the SWMM task image.
+
+```bash
+export NEER_API_KEY=nck_...              # Console API key (User settings → API keys)
+export PROJECT_ID=<console project id>   # a project in a team that holds a WRM API key
+export CONSOLE_BASE=https://aip-dev.neer.ai
+python scripts/console_model_rail_smoke.py all
+```
+
+Stages `import`, `edit`, `run`, `check` can be run on their own, and `--only <substring>` limits them to matching files. State is kept in `scripts/console_model_rail_smoke_state.json` (ignored by git); delete an entry's `layer_id` and `model_id` to import that file afresh. The final table shows, per model, whether it parsed, took the edits, completed, produced a report and cube, and whether the edited report step is in the `.rpt` and the edited cross section is in the rendered input the engine ran.
+
+---
