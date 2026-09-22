@@ -86,3 +86,4 @@ test_new_swmm_files.py
 test_fixed_encoding_files.py
 remove_failed_files.py
 test_new_swmm_output.log
+\n\n# Console model-rail smoke test state (per run, local)\nscripts/console_model_rail_smoke_state.json\n
