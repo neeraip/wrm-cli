@@ -55,6 +55,19 @@ FILES = [
 
 S = requests.Session()
 S.headers["Authorization"] = f"Bearer {KEY}"
+# A status poll that times out while the cluster is busy must not end the run.
+from requests.adapters import HTTPAdapter  # noqa: E402
+from urllib3.util.retry import Retry  # noqa: E402
+S.mount("https://", HTTPAdapter(max_retries=Retry(total=6, backoff_factor=2, status_forcelist=[502, 503, 504])))
+
+
+def wanted(rel, only):
+    """`only` is None (everything), a substring, or a set of files."""
+    if only is None:
+        return True
+    if isinstance(only, str):
+        return only in rel
+    return rel in only
 
 
 def log(*a):
@@ -75,8 +88,8 @@ def name_of(rel):
 
 # ---------------------------------------------------------------- import
 def do_import(state, only):
-    for rel in FILES:
-        if only and only not in rel:
+    for rel in (sorted(only) if isinstance(only, (set, list, tuple)) else FILES):
+        if not wanted(rel, only):
             continue
         entry = state.setdefault(rel, {})
         if entry.get("layer_id"):
@@ -101,7 +114,7 @@ def do_import(state, only):
 
 
 def wait_import(state, only, timeout=900):
-    pending = {rel for rel, e in state.items() if e.get("layer_id") and not e.get("model_id") and (not only or only in rel)}
+    pending = {rel for rel, e in state.items() if e.get("layer_id") and not e.get("model_id") and wanted(rel, only)}
     t0 = time.time()
     while pending and time.time() - t0 < timeout:
         for rel in sorted(pending):
@@ -169,7 +182,7 @@ def _get_path(data, path):
 
 def do_edit(state, only):
     for rel, e in state.items():
-        if only and only not in rel:
+        if not wanted(rel, only):
             continue
         if not e.get("model_id") or e.get("edit_status") == "ok":
             continue
@@ -212,7 +225,7 @@ def do_edit(state, only):
 # ---------------------------------------------------------------- run
 def do_run(state, only):
     for rel, e in state.items():
-        if only and only not in rel:
+        if not wanted(rel, only):
             continue
         if not e.get("model_id") or e.get("sim_id"):
             continue
@@ -237,7 +250,7 @@ TERMINAL = {"completed", "succeeded", "failed", "errored", "cancelled"}
 
 
 def wait_run(state, only, timeout=3600):
-    pending = {rel for rel, e in state.items() if e.get("sim_id") and e.get("sim_status") not in TERMINAL and (not only or only in rel)}
+    pending = {rel for rel, e in state.items() if e.get("sim_id") and e.get("sim_status") not in TERMINAL and wanted(rel, only)}
     t0 = time.time()
     while pending and time.time() - t0 < timeout:
         for rel in sorted(pending):
@@ -264,7 +277,7 @@ def wait_run(state, only, timeout=3600):
 # ---------------------------------------------------------------- check
 def do_check(state, only):
     for rel, e in state.items():
-        if only and only not in rel:
+        if not wanted(rel, only):
             continue
         sid = e.get("sim_id")
         if not sid:
@@ -308,7 +321,11 @@ def do_check(state, only):
                     found = ln.split()
                     break
             e["rendered_geom1"] = found[2] if found and len(found) > 2 else None
-            e["inp_has_edit"] = e["rendered_geom1"] is not None and float(e["rendered_geom1"]) == float(geom["after"])
+            try:
+                e["inp_has_edit"] = e["rendered_geom1"] is not None and float(e["rendered_geom1"]) == float(geom["after"])
+            except ValueError:
+                # Geom1 is a name for STREET/IRREGULAR shapes, not a number.
+                e["inp_has_edit"] = f"n/a ({e['rendered_geom1']})"
         save(state)
         log("check", rel, e.get("sim_status"), e.get("artifacts"), "report", e.get("report_http"), "edit in rpt:", e.get("rpt_has_edit"), "geom1 in inp:", e.get("inp_has_edit"))
 
